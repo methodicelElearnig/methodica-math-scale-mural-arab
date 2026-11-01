@@ -1,2 +1,28 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Line endings, pinned so every clone agrees (same rule as mass-measure-01/-02/-03, ratio-01).
+#
+# Without this the working tree depends on each machine's core.autocrlf (true on Windows Git),
+# and deployments are copied from the working tree — so a CRLF checkout makes a package that
+# cannot be reproduced from its own commit (verify-package.ps1 goes red on correct packages).
+#
+# State when added (2026-09-23, `git ls-files --eol`): 71 text files already LF in the index,
+# 1 CRLF (translation/translation-screen-manifest.csv — renormalised in the same commit),
+# 100 binary. The working tree was 72 × CRLF purely because of core.autocrlf=true.
+
+* text=auto eol=lf
+
+# Explicit binary, so auto-detection is never the only thing protecting media and fonts.
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.webp  binary
+*.mp4   binary
+*.webm  binary
+*.ttf   binary
+*.woff  binary
+*.woff2 binary
+*.pptx  binary
+*.xlf   text eol=lf
+
+# SVG is XML — text. "*.svg binary" would silently kill diffs on the illustrations.
+*.svg   text eol=lf
