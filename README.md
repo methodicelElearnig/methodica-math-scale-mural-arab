@@ -1,68 +1,74 @@
-# ציור קיר — לומדה אינטראקטיבית
-### משרד החינוך — תכנית 720 | כיתה ז' | יחס ופרופורציה
+# methodica-math-scale-mural-arab
 
----
+لومدة تفاعلية — رياضيات، "رسم جداريّ على الشاطئ الاستوائيّ": نسبة وتناسب ومقياس رسم (الصف الثامن). The
+Arabic build of `methodica-math-scale-mural`: the same 17 screens, 7 questions (4 and 7 in several parts), two
+attempts per question, four videos and the colour-lab applet, translated.
 
-## הפעלה
+This is the **second component** of the mafmar unit `methodica-math-scale-mural`, not a unit of its own
+(`2026/Documentation/mafmar-reporting/MOODLE-CONVERTED-UNIT.md` §15): component
+`methodica-math-scale-mural-arab-01`, `order: 2`, `languages: ["Arabic"]`; the unit record is the Hebrew one,
+byte for byte. The Hebrew component is `methodica-math-scale-mural-01` in the repo
+`methodicelElearnig/methodica-math-scale-mural`, converted the same day; this repo copies its shared layer,
+reporting glue, harness and tooling. What is particular to the Arabic build is in
+`docs/05-xapi-reporting-report.md`.
 
-פתח את `index.html` ישירות בדפדפן — אין צורך בשרת.
-
-```
-file:///path/to/720_WallPaint/index.html
-```
-
-**דפדפנים נתמכים:** Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
-
----
-
-## מבנה הפרויקט
+## Layout
 
 ```
-720_WallPaint/
-├── index.html          # נקודת כניסה
-├── config.js           # הגדרות: URL אפליקציה, נתיבי audio
-├── css/                # עיצוב
-├── js/                 # לוגיקה
-├── assets/             # גרפיקה ושמע
-│   ├── backgrounds/
-│   ├── characters/
-│   ├── illustrations/
-│   ├── icons/
-│   └── audio/
-└── applet/             # אפליקציית מעבדת חקר צבעים
+index.html                              local-browsing redirect into the component — never deployed
+methodica-math-scale-mural-arab-01/     ← the ONE deployable folder (= the package = the CDN folder)
+  index.html  registry.js
+  index_dev.html                        dev screen navigator (never deployed)
+  css/style.css  css/style-ar.css       the Arabic overrides; url('../assets/img/…') need this folder
+  js/                                   main.js (engine + xAPI helpers; the xAPI config block at its bottom),
+                                        one script per question and per slide
+  assets/                               img/, audio/, video/ (Video1_AR…Video4_AR), applet/color_lab.html
+  metadata/                             the Hebrew unit record + this component's record (9 items)
+  unit-js/                              the xAPI layer (10-identity, 20-xapi, 40-ledger, 50-loader, 90-boot)
+  _test/                                headless harness + the local library stub (never deployed)
+docs-and-tools/                         packaging allowlist/builder/verifier, Kata send/retrieve scripts
+docs/                                   the conversion report, the original spec, README_AR.md, the delivered metadata
+translation/                            the translation export and its tools — never deployed
+.claude/launch.json                     dev server config (never deployed)
 ```
 
----
+It deploys to `https://lomdot.education.gov.il/metodica/720/math/mafmar/methodica-math-scale-mural-arab-01/`.
+That URL is also the component id; items are `…-arab-01-NNN/`.
 
-## Placeholders
+## Reporting (xAPI, MOE v2.7)
 
-### Audio
-קבצי קריינות טרם סופקו. כשיתקבלו — יש להניח ב:
+The same as the Hebrew component (see its README); only the strings are Arabic:
+- component `initialized` on load; item `initialized`/`completed` by `SCREEN_TO_SUBCONTENT` (bottom of `js/main.js`);
+- `played`/`paused` for the four videos; `requested` once per question when help opens;
+- one `answered` per check, `answered.last` on the closing attempt; `result.response` is the Arabic metadata
+  text in the xAPI interaction format (choice by metadata index, `matching` `source[.]target`, `numeric`);
+  slide5's two `نعم`/`لا` questions are reported on the first choice and weigh 0;
+- component `completed` on "اِنْتَهَيْتُ" only, = `calculateScore()` ÷ 100, success from 0.7.
+
+## External dependencies
+
+Google Fonts (Cairo, Open Sans) on the page and in the applet; the applet loads React 18.3.1, ReactDOM 18.3.1
+and Babel standalone 7.26.4 from unpkg, pinned.
+
+## Run, test, package
+
+```bash
+cd methodica-math-scale-mural-arab-01
+NODE_PATH=/tmp/lomda-test/node_modules node _test/verify-report.js        # jsdom outside OneDrive (Windows: %LOCALAPPDATA%\Temp\lomda-test)
 ```
-assets/audio/slide2.mp3
-assets/audio/slide3.mp3
-assets/audio/slide5.mp3
-assets/audio/slide8.mp3
-assets/audio/slide10.mp3
+
+```powershell
+pwsh -File docs-and-tools/build-package.ps1 -DryRun
+pwsh -File docs-and-tools/send-metadata.ps1 -DryRun
 ```
 
-### Applet (יישומון)
-אפליקציית מעבדת חקר צבעים טרם סופקה.
-כשתתקבל — יש לעדכן ב-`config.js`:
-```javascript
-appletUrl: 'applet/index.html'  // או URL חיצוני
-```
+To see the statements locally, serve the repo root and open
+`methodica-math-scale-mural-arab-01/index.html?xapiLib=./_test/xapi-720-i.js`, then run `__stmts()` in the console.
 
----
+## Status / TODO
 
-## תיעוד
-
-- [`PROJECT_BRIEF.md`](PROJECT_BRIEF.md) — מטרות, מבנה, ניקוד
-- [`ARCHITECTURE.md`](ARCHITECTURE.md) — ארכיטקטורה טכנית מלאה
-
----
-
-## מפתח
-
-פרויקט זה מפותח על בסיס עיצוב פיגמה.
-Figma file: `vUmRePxl3GTK1gPunwDqx1`
+- [x] Converted (2026-11-01): mafmar structure, reporting, metadata (the delivered `methodica-ar-…` record rewritten as the unit's second component), harness (239 checks, 11 negative mutations caught), tooling. Unused Hebrew media removed.
+- [ ] Register the component in Kata as a **draft**: `send-metadata.ps1 -DryRun` → `-Preflight` (the unit EXISTS, the component is ABSENT) → live → `retrieve-metadata.ps1 -FailOnDrift` → `-Status`.
+- [ ] Build the package, upload the component folder to the CDN, verify every file by size and MD5.
+- [ ] Publish (`send-metadata.ps1 -Publish`, this component only).
+- [ ] Live Kata run with a test learner (`New-KataLaunchLinks.ps1 -ComponentId …`), recorded in `docs-and-tools/LIVE-VERIFICATION-<date>.md`.

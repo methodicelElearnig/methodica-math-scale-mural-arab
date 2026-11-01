@@ -1,8 +1,42 @@
+# Claude Code / editor local settings — never commit
+.claude/
+.vscode/
+.idea/
+
+# OS artifacts
 .DS_Store
-.claude/settings.local.json
+Thumbs.db
+desktop.ini
+
+# Logs / temp files
+*.log
+*.tmp
 *.swp
 *.swo
 *~
+npm-debug.log*
+
+# Dependencies (none; jsdom for _test lives OUTSIDE the tree)
+node_modules/
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# The Kata API key — never commit it; the package allowlist
+# (docs-and-tools/package-allowlist.ps1) keeps it out of deployments.
+kata-api-key.txt
+
+# Run records archived on purpose (docs-and-tools/SEND-METADATA.md) — exceptions to *.log.
+!docs-and-tools/send-metadata-*.log
+!docs-and-tools/retrieve-metadata-*.log
+!docs-and-tools/preflight-metadata-*.log
+!docs-and-tools/publish-metadata-*.log
+
+# Catalogue snapshot pulled down to diff against the component's metadata/ — not a source of truth.
+metadata-from/
 
 # translation export tooling — reinstall with `npm install` in translation/tools before regenerating the DOCX
 translation/tools/node_modules/
