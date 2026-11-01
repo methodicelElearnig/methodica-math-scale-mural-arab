@@ -1,0 +1,7 @@
+=== send-metadata PUBLISH (LIVE, one-way) ===
+[INFO] Base URL     : https://kata.cet.ac.il
+[INFO] Metadata dir : C:\Users\Vadim\OneDrive - methodic.co.il\Projects_ACTIVE\MOE\720\2026\methodica-math-scale-mural-arab\git-repo\methodica-math-scale-mural-arab\methodica-math-scale-mural-arab-01\metadata
+[INFO] Mode         : PUBLISH (LIVE, one-way)
+[INFO] draft     methodica-math-scale-mural-arab-01 (HTTP 200)
+[INFO] PUBLISHED methodica-math-scale-mural-arab-01 (HTTP 200)
+[INFO] Publish done. published=1 skipped=0 read-back-not-published=0

@@ -232,6 +232,8 @@ Archived so far (the Hebrew twin's logs are in its own repo):
 | `send-metadata-2026-11-01-component-draft.log` | **this component's birth** in Kata: the unit PATCHed with the unchanged Hebrew record (HTTP 200), then 10 × HTTP 201 (component `methodica-math-scale-mural-arab-01`, items 001–009). `created=10 updated=1 failed=0`. |
 | `retrieve-metadata-2026-11-01-component-draft.log` | **this component**: the audit right after the send, `unit=1 components=2 items=18 warnings=10`. All 10 warnings are the Hebrew component and its 9 items ("in KATA but not in metadata/"), which this repo does not hold; so `-FailOnDrift` exits 1 here by design. The Arabic component matches `metadata/` field for field except `createdAt`/`updatedAt`; Kata's `correctXapiResponsesPattern` equals the lomda's correct-answer `response` for all 12 questions. |
 | `publish-metadata-2026-11-01-status.log` | **this component**: `-Status` = `draft`. The Hebrew component, checked from its repo, is still `published`. |
+| `publish-metadata-2026-11-01.log` | **this component**: `-Publish` after the CDN upload was MD5-verified (103/103). `methodica-math-scale-mural-arab-01` draft → **published** (HTTP 200), read back as published. |
+| `publish-metadata-2026-11-01-status-published.log` | **this component**: `-Status` = `published` (draft=0 published=1). The Hebrew component, checked from its repo, is still `published`. |
 
 Note the log carries **no per-line timestamps** — only `[INFO]`/`[ERROR]` prefixes — so the
 date belongs in the filename. A stale `docs-and-tools/send-metadata.log` also survives from an
