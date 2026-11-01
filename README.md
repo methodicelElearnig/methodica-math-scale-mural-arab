@@ -68,7 +68,7 @@ To see the statements locally, serve the repo root and open
 ## Status / TODO
 
 - [x] Converted (2026-11-01): mafmar structure, reporting, metadata (the delivered `methodica-ar-…` record rewritten as the unit's second component), harness (239 checks, 11 negative mutations caught), tooling. Unused Hebrew media removed.
-- [ ] Register the component in Kata as a **draft**: `send-metadata.ps1 -DryRun` → `-Preflight` (the unit EXISTS, the component is ABSENT) → live → `retrieve-metadata.ps1 -FailOnDrift` → `-Status`.
+- [x] Registered in Kata as a **draft** (2026-11-01): preflight (unit EXISTS, component ABSENT) → live send `created=10 updated=1 failed=0` → retrieve (only the 10 expected Hebrew-component warnings; the Arabic component matches) → `-Status` = draft. Logs in `docs-and-tools/` (see `SEND-METADATA.md`).
 - [ ] Build the package, upload the component folder to the CDN, verify every file by size and MD5.
 - [ ] Publish (`send-metadata.ps1 -Publish`, this component only).
 - [ ] Live Kata run with a test learner (`New-KataLaunchLinks.ps1 -ComponentId …`), recorded in `docs-and-tools/LIVE-VERIFICATION-<date>.md`.

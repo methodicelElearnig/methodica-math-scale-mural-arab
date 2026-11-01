@@ -1,0 +1,7 @@
+=== send-metadata PREFLIGHT (read-only GETs) ===
+[INFO] Base URL     : https://kata.cet.ac.il
+[INFO] Metadata dir : C:\Users\Vadim\OneDrive - methodic.co.il\Projects_ACTIVE\MOE\720\2026\methodica-math-scale-mural-arab\git-repo\methodica-math-scale-mural-arab\methodica-math-scale-mural-arab-01\metadata
+[INFO] Mode         : PREFLIGHT (read-only GETs)
+[INFO] EXISTS  unit methodica-math-scale-mural (HTTP 200)
+[INFO] ABSENT  component methodica-math-scale-mural-arab-01 (HTTP 404)
+[INFO] Preflight done. absent=1 exists=1 other=0 — nothing was written.

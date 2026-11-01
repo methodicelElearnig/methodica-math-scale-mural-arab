@@ -47,6 +47,11 @@ Media the Arabic build no longer referenced: the four Hebrew videos (`FirstVidfi
 `README_AR.md`, `ARCHITECTURE.md` and `PROJECT_BRIEF.md` moved to `docs/`; `translation/` stays at the root
 and is never packaged.
 
+## Kata
+
+Registered as a draft on 2026-11-01: the unit was PATCHed with its unchanged Hebrew record, and the component
+and its 9 items were created. The Hebrew component stays published. Logs in `docs-and-tools/`.
+
 ## Not done here (needs the user)
 
-Kata registration of the component, CDN upload, publish and the live run.
+CDN upload, publish and the live run.
