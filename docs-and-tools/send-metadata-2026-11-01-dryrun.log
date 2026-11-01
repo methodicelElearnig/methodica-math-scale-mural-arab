@@ -1,0 +1,27 @@
+=== send-metadata DRY-RUN (no network) ===
+[INFO] Base URL     : https://kata.cet.ac.il
+[INFO] Metadata dir : C:\Users\Vadim\OneDrive - methodic.co.il\Projects_ACTIVE\MOE\720\2026\methodica-math-scale-mural-arab\git-repo\methodica-math-scale-mural-arab\methodica-math-scale-mural-arab-01\metadata
+[INFO] Mode         : DRY-RUN (no network)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/content-units
+[INFO] CREATED unit methodica-math-scale-mural (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/content-units/methodica-math-scale-mural/components
+[INFO] CREATED component methodica-math-scale-mural-arab-01 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-001 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-002 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-003 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-004 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-005 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-006 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-007 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-008 (HTTP 000)
+[INFO] DRY-RUN POST https://kata.cet.ac.il/api/v1/component/items?componentKey=https%3A%2F%2Flomdot.education.gov.il%2Fmetodica%2F720%2Fmath%2Fmafmar%2Fmethodica-math-scale-mural-arab-01%2F
+[INFO] CREATED item methodica-math-scale-mural-arab-01-009 (HTTP 000)
+[INFO] Done. created=11 updated=0 failed=0

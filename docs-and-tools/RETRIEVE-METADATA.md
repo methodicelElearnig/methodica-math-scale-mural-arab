@@ -1,6 +1,12 @@
 # Retrieving metadata from the Kata catalog
 
 > **methodica-math-scale-mural-arab (2026-11-01):** copied from the Hebrew twin `methodica-math-scale-mural` and re-pointed: component `methodica-math-scale-mural-arab-01`, the **second component** (`order: 2`, `languages: ["Arabic"]`) of the existing unit `methodica-math-scale-mural` (MOODLE-CONVERTED-UNIT.md §15). So `-Preflight` reports the unit **EXISTS** (expected) and only the component ABSENT; the live send PATCHes the unit with the same Hebrew record and creates the component and its 9 items; `retrieve-metadata.ps1` also sees the Hebrew component; `-Publish` publishes only this component; launch links use `-ComponentId`, not `-UnitKey`. Older notes below apply with the slugs swapped.
+>
+> **Expect `warnings=10`, not 0, and `-FailOnDrift` exit 1** (first seen 2026-11-01): the unit also holds the
+> Hebrew component and its 9 items, which are not in this repo's `metadata/`, and each is reported "in KATA
+> but not in metadata/". Any warning beyond those 10, or any that names `-arab-01`, is real drift. Compare
+> `metadata-from/methodica-math-scale-mural-arab-01.json` with `metadata/` field by field (the textual diff
+> is mostly formatting); the Hebrew file in `metadata-from/` belongs to the other repo.
 
 > **methodica-math-scale-mural (2026-11-01):** copied from `methodica-math-time-model` and re-pointed: component `methodica-math-scale-mural-01`, same base `/720/math/mafmar`, 9 catalogue items. Older notes below were written for the donor units and apply with the slugs swapped.
 

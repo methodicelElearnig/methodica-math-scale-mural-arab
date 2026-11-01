@@ -1,0 +1,6 @@
+=== send-metadata STATUS (read-only GETs) ===
+[INFO] Base URL     : https://kata.cet.ac.il
+[INFO] Metadata dir : C:\Users\Vadim\OneDrive - methodic.co.il\Projects_ACTIVE\MOE\720\2026\methodica-math-scale-mural-arab\git-repo\methodica-math-scale-mural-arab\methodica-math-scale-mural-arab-01\metadata
+[INFO] Mode         : STATUS (read-only GETs)
+[INFO] draft     methodica-math-scale-mural-arab-01 (HTTP 200)
+[INFO] Status done. draft=1 published=0 unreadable=0 — nothing was written.

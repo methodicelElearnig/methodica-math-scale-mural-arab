@@ -1,0 +1,16 @@
+=== send-metadata LIVE ===
+[INFO] Base URL     : https://kata.cet.ac.il
+[INFO] Metadata dir : C:\Users\Vadim\OneDrive - methodic.co.il\Projects_ACTIVE\MOE\720\2026\methodica-math-scale-mural-arab\git-repo\methodica-math-scale-mural-arab\methodica-math-scale-mural-arab-01\metadata
+[INFO] Mode         : LIVE
+[INFO] UPDATED unit methodica-math-scale-mural (HTTP 200)
+[INFO] CREATED component methodica-math-scale-mural-arab-01 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-001 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-002 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-003 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-004 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-005 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-006 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-007 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-008 (HTTP 201)
+[INFO] CREATED item methodica-math-scale-mural-arab-01-009 (HTTP 201)
+[INFO] Done. created=10 updated=1 failed=0
