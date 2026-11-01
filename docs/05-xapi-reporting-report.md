@@ -55,6 +55,5 @@ and its 9 items were created. The Hebrew component stays published. Logs in `doc
 Packaged from `db9bdca` and uploaded to the CDN on 2026-11-01 (103/103 files identical by size and MD5),
 then published (`-Publish`, HTTP 200; `-Status` = published).
 
-## Not done here (needs the user)
-
-The live run with a test learner.
+Live run on 2026-11-01 (`VADIM-SCALEMURAL-AR-TEST-1`): 43/43 statements accepted, component `completed`
+0.85 = the popup; `docs-and-tools/LIVE-VERIFICATION-2026-11-01.md`.
