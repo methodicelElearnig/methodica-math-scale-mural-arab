@@ -71,4 +71,4 @@ To see the statements locally, serve the repo root and open
 - [x] Registered in Kata as a **draft** (2026-11-01): preflight (unit EXISTS, component ABSENT) → live send `created=10 updated=1 failed=0` → retrieve (only the 10 expected Hebrew-component warnings; the Arabic component matches) → `-Status` = draft. Logs in `docs-and-tools/` (see `SEND-METADATA.md`).
 - [x] Packaged from `db9bdca` (103 files, 37,274,780 bytes) and uploaded to the CDN (2026-11-01): 103/103 files identical by size and MD5; the live page loads clean (`deployments/2026-11-01/DEPLOY.md`, next to the repo).
 - [x] Published in Kata (2026-11-01): `-Publish` HTTP 200, `-Status` = published. Logs in `docs-and-tools/`.
-- [ ] Live Kata run with a test learner (`New-KataLaunchLinks.ps1 -ComponentId …`), recorded in `docs-and-tools/LIVE-VERIFICATION-<date>.md`.
+- [x] Live Kata run (2026-11-01, `VADIM-SCALEMURAL-AR-TEST-1`): 43/43 statements accepted (HTTP 200), one component `completed` {success: true, scaled: 0.85}, the same as the Hebrew run with Arabic responses. Record: `docs-and-tools/LIVE-VERIFICATION-2026-11-01.md`.
