@@ -603,6 +603,60 @@ const norm = (x) => String(x).replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').re
       run('xapiResponse("005","q1", { choices: ["לא קיים"] })');
       ok(g, 'an unresolvable UI text warns "not in metadata"', JSON.parse(run('JSON.stringify(window.__warns)')).slice(nW).some((m) => m.includes('not in metadata')));
 
+      /* ── B-2 (lane K, 2026-11-13; monday 13454123722): Back never closes an item ──
+         After the walk: a fresh recorder state, then for E = the first evaluated item whose first screen
+         follows a screen P of another item (and, where the part has one, the first such E whose P belongs
+         to no item): forward into E, a wrong answer, Back to P → no 'completed' for E; forward into E
+         again, the right answer, forward out of E → exactly one 'completed' for E, success:true.
+         The answers are recorded as the layer records them (XAPI_Q_RESULTS / XAPI_Q_SCALED + the
+         library's answered map); the navigation is the page's own (goTo(index) in js/main.js). */
+      {
+        const NAV = 'function (id) { goTo(Array.prototype.indexOf.call(document.querySelectorAll(".screen"), document.getElementById(id))); }';
+        run('(function(){ window.__b2nav = ' + NAV + '; return 1; })()');
+        const b2walk = JSON.parse(run('JSON.stringify(Array.prototype.map.call(document.querySelectorAll(".screen"), function (e) { return e.id; }))'));
+        const b2map = JSON.parse(run('JSON.stringify(SCREEN_TO_SUBCONTENT)'));
+        const b2eval = JSON.parse(run('JSON.stringify(XAPI_EVAL_ITEMS)'));
+        ok(g, 'B-2: _xapiScreenRank and _xapiIsBackward are defined', run('typeof _xapiScreenRank + typeof _xapiIsBackward') === 'functionfunction');
+        const b2rank = JSON.parse(run('JSON.stringify(' + JSON.stringify(b2walk.concat(Object.keys(b2map))) + '.map(function (s) { return typeof _xapiScreenRank === "function" ? _xapiScreenRank(s) : null; }))'));
+        const wr = b2rank.slice(0, b2walk.length);
+        ok(g, 'B-2 rank: every screen and every map key has a rank', b2rank.every((r) => r !== null), JSON.stringify(b2rank));
+        ok(g, 'B-2 rank: the screens rank in walk order', wr.every((r, i) => i === 0 || r > wr[i - 1]), JSON.stringify(wr));
+        ok(g, 'B-2: no hub screens in this linear unit', run('typeof XAPI_HUB_SCREENS') === 'undefined');
+        const itemOf = (id) => (b2map[id] ? b2map[id][0] : null);
+        const cands = [];
+        for (const wantNull of [false, true]) {
+          for (let i = 1; i < b2walk.length; i++) {
+            const it = itemOf(b2walk[i]);
+            if (!it || !b2eval[it] || itemOf(b2walk[i - 1]) === it) continue;
+            if ((itemOf(b2walk[i - 1]) === null) !== wantNull) continue;
+            let j = i; while (j + 1 < b2walk.length && itemOf(b2walk[j + 1]) === it) j++;
+            if (j + 1 >= b2walk.length) continue;
+            cands.push({ E: it, P: b2walk[i - 1], IN: b2walk[i], OUT: b2walk[j + 1] }); break;
+          }
+        }
+        ok(g, 'B-2: a Back case exists (an evaluated item after another screen)', cands.length > 0);
+        for (const c of cands) {
+          const qs = ((compMeta.subContent || []).find((s) => s.id === itemId(c.E)) || {}).questions || [];
+          const keys = qs.map((q) => c.E + '/' + q.questionId.split('/').pop());
+          const answer = (right) => run('(function(){ window.xapiItemAnswered[' + JSON.stringify(itemId(c.E)) + '] = true; ' +
+            JSON.stringify(keys) + '.forEach(function (k) { XAPI_Q_RESULTS[k] = ' + right + '; XAPI_Q_SCALED[k] = ' + (right ? 1 : 0) + '; }); return 1; })()');
+          run('(function(){ window.__log = []; _ledger = {}; xapiCurrentItem = null; window.xapiItemAnswered = {};' +
+              ' Object.keys(XAPI_Q_RESULTS).forEach(function (k) { delete XAPI_Q_RESULTS[k]; });' +
+              ' Object.keys(XAPI_Q_SCALED).forEach(function (k) { delete XAPI_Q_SCALED[k]; }); return 1; })()');
+          const nav = (id) => run('(function(){ window.__b2nav(' + JSON.stringify(id) + '); return 1; })()');
+          const doneE = (t) => t.filter((s) => String(s.v).split('.')[0] === 'completed' && s.id === itemId(c.E));
+          nav(c.P); nav(c.IN); answer(false);
+          let n1 = logOf().length;
+          nav(c.P);
+          const tb = logOf().slice(n1);
+          ok(g, 'B-2 ' + c.E + ': wrong answer, Back ' + c.IN + ' → ' + c.P + ' sends no completed for ' + c.E, keys.length > 0 && doneE(tb).length === 0, JSON.stringify(tb));
+          nav(c.IN); answer(true); nav(c.OUT);
+          const all = doneE(logOf());
+          ok(g, 'B-2 ' + c.E + ': back in, right answer, forward → ' + c.OUT + ': exactly one completed for ' + c.E + ', success:true',
+             all.length === 1 && all[0].r && all[0].r.success === true, JSON.stringify(all));
+        }
+      }
+
       await new Promise((r) => setTimeout(r, 50));
       const errs = pageErrors.filter((m) => !/Not implemented/.test(m));
       ok(g, 'no uncaught page error', errs.length === 0, errs.slice(0, 3).join(' | '));
