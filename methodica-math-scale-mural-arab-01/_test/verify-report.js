@@ -244,7 +244,9 @@ const norm = (x) => String(x).replace(/<[^>]+>/g, '').replace(/&quot;/g, '"').re
   ok(g, 'no ../ in any local reference in index.html', !/(?:src|href)="\.\.\//.test(html));
   ok(g, '?v= on every local script src, the same on every shared file', scripts.every((s) => /\?v=\d+$/.test(s)) && new Set(scripts.filter((s) => s.startsWith('unit-js/')).map((s) => s.replace(/^.*\?v=/, ''))).size === 1, scripts.join(', '));
   const local = [...html.matchAll(/<link\b[^>]*href="([^"]+)"[^>]*>/g)].filter((m) => /stylesheet/.test(m[0])).map((m) => m[1]).filter((l) => !/^https?:/.test(l));
-  ok(g, '?v= on the two local stylesheets (css/style.css, css/style-ar.css)', local.length === 2 && local[0] === 'css/style.css?v=1' && local[1] === 'css/style-ar.css?v=1', local.join(', '));
+  /* the same ?v= on both (was pinned to v=1; 18.11.26 the drag-look change bumped them to 2) */
+  const sv = local.map((l) => (l.match(/\?v=(\d+)$/) || [])[1]);
+  ok(g, '?v= on the two local stylesheets (css/style.css, css/style-ar.css), the same on both', local.length === 2 && /^css\/style\.css\?v=\d+$/.test(local[0]) && /^css\/style-ar\.css\?v=\d+$/.test(local[1]) && sv[0] === sv[1], local.join(', '));
   ok(g, 'lang="ar" dir="rtl"', /<html\b(?=[^>]*\blang="ar")(?=[^>]*\bdir="rtl")[^>]*>/.test(html));
   const media = [...html.replace(/<!--[\s\S]*?-->/g, '').matchAll(/(?:src|href|poster)="([^"]+)"/g)].map((m) => m[1]).filter((u) => !/^(https?:|data:|#|javascript:)/.test(u)).map((u) => decodeURI(u.replace(/[?#].*$/, '')));
   const missing = media.filter((u) => !resolveExact(path.join(compDir, u)));

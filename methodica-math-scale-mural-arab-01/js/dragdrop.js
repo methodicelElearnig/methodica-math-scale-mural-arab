@@ -80,8 +80,8 @@ function resetQ1ForRetry() {
     c.classList.remove('q1-chip-placed');
     delete c.dataset.placed;
     c.style.animation = 'none';
-    c.style.opacity   = '1';
-    c.style.transform = 'translateY(0)';
+    c.style.opacity   = '';   /* not '1': an inline 1 would beat .q1-chip-dragging */
+    c.style.transform = '';
   });
   // Clear all drop zone displays
   for (var i = 1; i <= 3; i++) { q1SetDropDisplay(i, null, false); }
@@ -158,8 +158,8 @@ function q1RemoveFromDrop(dropNum) {
     delete chip.dataset.placed;
     chip.classList.remove('q1-chip-placed');
     chip.style.animation = 'none';
-    chip.style.opacity   = '1';
-    chip.style.transform = 'translateY(0)';
+    chip.style.opacity   = '';   /* not '1': an inline 1 would beat .q1-chip-dragging */
+    chip.style.transform = '';
   }
   q1UpdateSubmitVisibility();  // Fix 3
 }

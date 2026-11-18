@@ -37,7 +37,12 @@ function wireWordBankDnd(cfg) {
     canDrag: function (word, el) {
       return !cfg.isDone() && !el.classList.contains(cfg.placedClass);
     },
-    onPick: function (word, el) { el.classList.add(cfg.draggingClass); },
+    onPick: function (word, el) {
+      /* q1 chips carry the screen entry animation (fill: both); switch it off for good so the
+         dragging opacity applies and a cancelled drag does not replay it (9 s invisible). */
+      el.style.animation = 'none';
+      el.classList.add(cfg.draggingClass);
+    },
     onTap: function (word) {
       if (cfg.isDone()) return;
       var n = cfg.findEmpty();
