@@ -246,7 +246,7 @@
 <!-- גזע משפט — node 2:68, right edge x=881, top=355 → right:1039 -->
 <p class="q1-stem q1-stem-1" dir="rtl">في خليط الألوان يوجد بالمُجمَل</p>
 <!-- drop zone 1 — node 2:134, left=348, top=355, 163×49 -->
-<div class="q1-drop" id="q1-drop-1" onclick="q1DropZoneClick(1)" ondragover="q1DragOver(event)" ondrop="q1DropOnZone(event,1)">
+<div class="q1-drop" id="q1-drop-1" onclick="q1DropZoneClick(1)">
 <img alt="" class="q1-drop-empty-bg" draggable="false" src="assets/img/q1-drop-empty.png"/>
 <div class="q1-drop-chip">
 <span class="q1-drop-label" dir="rtl"></span>
@@ -260,7 +260,7 @@
 <!-- גזע משפט — node 2:72, right edge x=881, top=418 → right:1039 -->
 <p class="q1-stem q1-stem-2" dir="rtl">اللون الغالب في الخليط هو</p>
 <!-- drop zone 2 — node 2:130, left=205, top=414, 163×49 -->
-<div class="q1-drop" id="q1-drop-2" onclick="q1DropZoneClick(2)" ondragover="q1DragOver(event)" ondrop="q1DropOnZone(event,2)">
+<div class="q1-drop" id="q1-drop-2" onclick="q1DropZoneClick(2)">
 <img alt="" class="q1-drop-empty-bg" draggable="false" src="assets/img/q1-drop-empty.png"/>
 <div class="q1-drop-chip">
 <span class="q1-drop-label" dir="rtl"></span>
@@ -272,7 +272,7 @@
 <!-- גזע משפט — node 2:79, right edge x=881, top=482 → right:1039 -->
 <p class="q1-stem q1-stem-3" dir="rtl">درجة اللون الناتج ستكون أخضر مائلًا أكثر إلى اللون</p>
 <!-- drop zone 3 — node 2:80, left=191, top=474, 163×49 -->
-<div class="q1-drop" id="q1-drop-3" onclick="q1DropZoneClick(3)" ondragover="q1DragOver(event)" ondrop="q1DropOnZone(event,3)">
+<div class="q1-drop" id="q1-drop-3" onclick="q1DropZoneClick(3)">
 <img alt="" class="q1-drop-empty-bg" draggable="false" src="assets/img/q1-drop-empty.png"/>
 <div class="q1-drop-chip">
 <span class="q1-drop-label" dir="rtl"></span>
@@ -280,32 +280,32 @@
 </div>
 <!-- ─── מחסן מילים — 6 chips ─── -->
 <!-- chip "5" — left=742, top=568, node 2:124 -->
-<div class="q1-chip" data-word="5" draggable="true" id="q1-chip-5" onclick="q1ChipClick(event,'5')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'5')">
+<div class="q1-chip" data-word="5" id="q1-chip-5">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label q1-chip-label-num">5</span>
 </div>
 <!-- chip "6" — left=742, top=630, node 2:127 -->
-<div class="q1-chip" data-word="6" draggable="true" id="q1-chip-6" onclick="q1ChipClick(event,'6')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'6')">
+<div class="q1-chip" data-word="6" id="q1-chip-6">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label q1-chip-label-num">6</span>
 </div>
 <!-- chip "כחול" — left=553, top=568, node 2:113 -->
-<div class="q1-chip" data-word="الأزرق" draggable="true" id="q1-chip-kahol" onclick="q1ChipClick(event,'الأزرق')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'الأزرق')">
+<div class="q1-chip" data-word="الأزرق" id="q1-chip-kahol">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label">الأزرق</span>
 </div>
 <!-- chip "צהוב" — left=553, top=631, node 2:116 -->
-<div class="q1-chip" data-word="الأصفر" draggable="true" id="q1-chip-tsahov" onclick="q1ChipClick(event,'الأصفر')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'الأصفر')">
+<div class="q1-chip" data-word="الأصفر" id="q1-chip-tsahov">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label">الأصفر</span>
 </div>
 <!-- chip "חמים ובהיר" — left=359, top=567, node 2:119 -->
-<div class="q1-chip" data-word="الدافئ والفاتح" draggable="true" id="q1-chip-hamim" onclick="q1ChipClick(event,'الدافئ والفاتح')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'الدافئ والفاتح')">
+<div class="q1-chip" data-word="الدافئ والفاتح" id="q1-chip-hamim">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label">الدافئ والفاتح</span>
 </div>
 <!-- chip "קריר וכהה" — left=359, top=630, node 2:120 -->
-<div class="q1-chip" data-word="البارد والغامق" draggable="true" id="q1-chip-karir" onclick="q1ChipClick(event,'البارد والغامق')" ondragend="q1DragEnd(event)" ondragstart="q1DragStart(event,'البارد والغامق')">
+<div class="q1-chip" data-word="البارد والغامق" id="q1-chip-karir">
 <img alt="" class="q1-chip-bg-img" draggable="false" src="assets/img/q1-chip-bg.png"/>
 <span class="q1-chip-label">البارد والغامق</span>
 </div>
@@ -1373,7 +1373,7 @@
 <p class="q7-semibold">تحتوي معًا على</p>
 </div>
 <!-- DROP1 — blank for "5 ליטרים": left:712 top:375 w:163 h:49 -->
-<div aria-label="مكان لإدخال العدد" class="q7-drop" id="q7-drop-1" onclick="q7DropZoneClick(1)" ondragover="q7DragOver(event)" ondrop="q7DropOnZone(event,1)">
+<div aria-label="مكان لإدخال العدد" class="q7-drop" id="q7-drop-1" onclick="q7DropZoneClick(1)">
 <img alt="" class="q7-drop-bg" draggable="false" src="assets/img/q7-drop.png"/>
 <span class="q7-drop-label"></span>
 </div>
@@ -1385,7 +1385,7 @@
 <p class="q7-semibold">ولذلك، يَجِب تحضير</p>
 </div>
 <!-- DROP2 — blank for "6 מנות": left:657 top:473 w:163 h:49 -->
-<div aria-label="مكان لإدخال العدد" class="q7-drop" id="q7-drop-2" onclick="q7DropZoneClick(2)" ondragover="q7DragOver(event)" ondrop="q7DropOnZone(event,2)">
+<div aria-label="مكان لإدخال العدد" class="q7-drop" id="q7-drop-2" onclick="q7DropZoneClick(2)">
 <img alt="" class="q7-drop-bg" draggable="false" src="assets/img/q7-drop.png"/>
 <span class="q7-drop-label"></span>
 </div>
@@ -1402,19 +1402,19 @@
 <p class="q7-illu-caption q7-illu-caption-blue" dir="rtl">5 لتر</p>
 <!-- word bank — 4 chips at top≈585 -->
 <div class="q7-chips">
-<div class="q7-chip" data-word="6" draggable="true" onclick="q7ChipClick(event,'6')" ondragend="q7DragEnd(event)" ondragstart="q7DragStart(event,'6')">
+<div class="q7-chip" data-word="6">
 <img alt="" class="q7-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7-chip-label">6</span>
 </div>
-<div class="q7-chip" data-word="30" draggable="true" onclick="q7ChipClick(event,'30')" ondragend="q7DragEnd(event)" ondragstart="q7DragStart(event,'30')">
+<div class="q7-chip" data-word="30">
 <img alt="" class="q7-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7-chip-label">30</span>
 </div>
-<div class="q7-chip" data-word="28" draggable="true" onclick="q7ChipClick(event,'28')" ondragend="q7DragEnd(event)" ondragstart="q7DragStart(event,'28')">
+<div class="q7-chip" data-word="28">
 <img alt="" class="q7-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7-chip-label">28</span>
 </div>
-<div class="q7-chip" data-word="5" draggable="true" onclick="q7ChipClick(event,'5')" ondragend="q7DragEnd(event)" ondragstart="q7DragStart(event,'5')">
+<div class="q7-chip" data-word="5">
 <img alt="" class="q7-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7-chip-label">5</span>
 </div>
@@ -1493,7 +1493,7 @@
 <!-- "ליטרים" right=1649px top=393px -->
 <p class="q7b-blue-litrim q7b-semibold" dir="rtl">لترًا</p>
 <!-- DROP1 — blank for "18": left:279 top:389 w:163 h:41 -->
-<div aria-label="مكان لإدخال العدد" class="q7b-drop" id="q7b-drop-1" onclick="q7bDropZoneClick(1)" ondragover="q7bDragOver(event)" ondrop="q7bDropOnZone(event,1)">
+<div aria-label="مكان لإدخال العدد" class="q7b-drop" id="q7b-drop-1" onclick="q7bDropZoneClick(1)">
 <img alt="" class="q7b-drop-bg" draggable="false" src="assets/img/q7-drop.png"/>
 <span class="q7b-drop-label"></span>
 </div>
@@ -1503,7 +1503,7 @@
 <!-- "ליטרים" right=1649px top=450px -->
 <p class="q7b-yellow-litrim q7b-semibold" dir="rtl">لترًا</p>
 <!-- DROP2 — blank for "12": left:279 top:446 w:163 h:41 -->
-<div aria-label="مكان لإدخال العدد" class="q7b-drop" id="q7b-drop-2" onclick="q7bDropZoneClick(2)" ondragover="q7bDragOver(event)" ondrop="q7bDropOnZone(event,2)">
+<div aria-label="مكان لإدخال العدد" class="q7b-drop" id="q7b-drop-2" onclick="q7bDropZoneClick(2)">
 <img alt="" class="q7b-drop-bg" draggable="false" src="assets/img/q7-drop.png"/>
 <span class="q7b-drop-label"></span>
 </div>
@@ -1514,19 +1514,19 @@
 <p class="q7-illu-caption q7-illu-caption-blue" dir="rtl">5 لتر</p>
 <!-- word bank — 4 chips: "30","28","18","12" at left:260/449/638/827 top:529 -->
 <div class="q7b-chips">
-<div class="q7b-chip" data-word="30" draggable="true" onclick="q7bChipClick(event,'30')" ondragend="q7bDragEnd(event)" ondragstart="q7bDragStart(event,'30')">
+<div class="q7b-chip" data-word="30">
 <img alt="" class="q7b-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7b-chip-label">30</span>
 </div>
-<div class="q7b-chip" data-word="28" draggable="true" onclick="q7bChipClick(event,'28')" ondragend="q7bDragEnd(event)" ondragstart="q7bDragStart(event,'28')">
+<div class="q7b-chip" data-word="28">
 <img alt="" class="q7b-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7b-chip-label">28</span>
 </div>
-<div class="q7b-chip" data-word="18" draggable="true" onclick="q7bChipClick(event,'18')" ondragend="q7bDragEnd(event)" ondragstart="q7bDragStart(event,'18')">
+<div class="q7b-chip" data-word="18">
 <img alt="" class="q7b-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7b-chip-label">18</span>
 </div>
-<div class="q7b-chip" data-word="12" draggable="true" onclick="q7bChipClick(event,'12')" ondragend="q7bDragEnd(event)" ondragstart="q7bDragStart(event,'12')">
+<div class="q7b-chip" data-word="12">
 <img alt="" class="q7b-chip-bg" draggable="false" src="assets/img/q7-chip.png"/>
 <span class="q7b-chip-label">12</span>
 </div>
@@ -1679,7 +1679,9 @@
 <script src="unit-js/40-ledger.js?v=2"></script>
 <script src="unit-js/50-loader.js?v=2"></script>
 <script src="registry.js?v=1"></script>
-<script src="js/dragdrop.js?v=1"></script>
+<script src="unit-js/30-pointer-dnd.js?v=2"></script>  <!-- pointer drag, mouse + touch (18.11.26) -->
+<script src="js/wordbank-dnd.js?v=1"></script>         <!-- q1 / q7 / q7b wiring -->
+<script src="js/dragdrop.js?v=2"></script>
 <script src="js/radio.js?v=1"></script>
 <script src="js/radio3.js?v=1"></script>
 <script src="js/radio4.js?v=1"></script>
@@ -1687,8 +1689,8 @@
 <script src="js/numeric4c.js?v=1"></script>
 <script src="js/radio5.js?v=1"></script>
 <script src="js/radio6.js?v=1"></script>
-<script src="js/dragdrop7.js?v=1"></script>
-<script src="js/dragdrop7b.js?v=1"></script>
+<script src="js/dragdrop7.js?v=2"></script>
+<script src="js/dragdrop7b.js?v=2"></script>
 <script src="js/slide3.js?v=1"></script>
 <script src="js/slide5.js?v=1"></script>
 <script src="js/slide1.js?v=1"></script>

@@ -14,11 +14,7 @@
 
    Public API:
      initQ7b()                 — called by onEnterScreen()
-     q7bChipClick(e, word)     — click chip to place
-     q7bDragStart(e, word)     — drag chip
-     q7bDragEnd(e)             — drag end
-     q7bDragOver(e)            — drag over drop zone
-     q7bDropOnZone(e, dropNum) — drop on zone
+     (drag / tap)            — js/wordbank-dnd.js, wired in initQ7b
      q7bDropZoneClick(dropNum) — click drop zone to return chip
      submitQ7b()               — צדקתי? button
      resetQ7bForRetry()        — נסו שוב button
@@ -28,13 +24,19 @@
 var Q7B_CORRECT = { 1: '18', 2: '12' };
 
 var q7bState = { attempts: 0, drops: { 1: null, 2: null }, done: false };
-var q7bDragWord = null;
+var q7bDnd = null;   /* createPointerDnd handle, wired once */
 
 /* ── Init ─────────────────────────────────────────────────── */
 function initQ7b() {
   q7bState = { attempts: 0, drops: { 1: null, 2: null }, done: false };
   var screen = document.getElementById('screen-q7b');
   if (!screen) return;
+  if (!q7bDnd) q7bDnd = wireWordBankDnd({
+    screenId: 'screen-q7b', chipClass: 'q7b-chip', placedClass: 'q7b-chip-placed',
+    draggingClass: 'q7b-chip-dragging', dropPrefix: 'q7b-drop-', dropCount: 2,
+    isDone: function () { return q7bState.done; },
+    place: q7bPlaceWord, findEmpty: q7bFindFirstEmpty
+  });
   screen.dataset.q7bState = 'main';
   screen.dataset.q7bHelp  = 'closed';
   delete screen.dataset.qDone;
@@ -105,42 +107,7 @@ function q7bSetDropDisplay(dropNum, word, correctStyle, wrongStyle) {
   }
 }
 
-/* ── Drag & Drop ──────────────────────────────────────────── */
-function q7bDragStart(event, word) {
-  if (q7bState.done) { event.preventDefault(); return; }
-  q7bDragWord = word;
-  event.dataTransfer.setData('text/plain', word);
-  event.currentTarget.classList.add('q7b-chip-dragging');
-  event.dataTransfer.setDragImage(event.currentTarget, event.offsetX, event.offsetY);
-}
-
-function q7bDragEnd(event) {
-  event.currentTarget.classList.remove('q7b-chip-dragging');
-  q7bDragWord = null;
-}
-
-function q7bDragOver(event) {
-  if (!q7bState.done) event.preventDefault();
-}
-
-function q7bDropOnZone(event, dropNum) {
-  if (q7bState.done) return;
-  event.preventDefault();
-  var word = event.dataTransfer.getData('text/plain') || q7bDragWord;
-  q7bDragWord = null;
-  if (!word) return;
-  q7bPlaceWord(word, dropNum);
-}
-
-/* ── Click-to-place ───────────────────────────────────────── */
-function q7bChipClick(event, word) {
-  if (q7bState.done) return;
-  var chip = event.currentTarget;
-  if (chip.classList.contains('q7b-chip-placed')) return;
-  var empty = q7bFindFirstEmpty();
-  if (empty !== null) q7bPlaceWord(word, empty);
-}
-
+/* ── Drag / tap: js/wordbank-dnd.js (wired in initQ7b). A filled blank is emptied by a click. ── */
 function q7bDropZoneClick(dropNum) {
   if (q7bState.done) return;
   var word = q7bState.drops[dropNum];
