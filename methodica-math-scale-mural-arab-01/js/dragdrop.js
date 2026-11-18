@@ -5,7 +5,7 @@
 
    מנגנון:
      • 6 chips ב-word bank → 3 drop zones
-     • גרירה (HTML5 DnD) + לחיצה להנחה (click-to-place)
+     • גרירה (pointer, עכבר + מגע — js/wordbank-dnd.js) + הקשה להנחה (tap-to-place)
      • לחיצה על drop מלא → החזרת chip ל-bank
      • 2 ניסיונות: שגוי → tryagain → שגוי שני → incorrect + unlock
      •             נכון (כל ניסיון) → correct + unlock
@@ -13,16 +13,22 @@
 
 const Q1_CORRECT_ANSWERS = { 1: '5', 2: 'الأزرق', 3: 'البارد والغامق' };
 /* AR build: these values are the chips' visible Arabic labels — they must
-   stay byte-identical to data-word / q1DragStart / q1ChipClick in index.html. */
+   stay byte-identical to the chips' data-word in index.html. */
 
 let q1State  = { attempts: 0, drops: { 1: null, 2: null, 3: null }, done: false };
-let q1DragWord = null;
+let q1Dnd = null;   /* createPointerDnd handle, wired once */
 
 /* ── Init / Reset ─────────────────────────────────────────────── */
 function initQ1() {
   q1State = { attempts: 0, drops: { 1: null, 2: null, 3: null }, done: false };
   var screen = document.getElementById('screen-q1');
   if (!screen) return;
+  if (!q1Dnd) q1Dnd = wireWordBankDnd({
+    screenId: 'screen-q1', chipClass: 'q1-chip', placedClass: 'q1-chip-placed',
+    draggingClass: 'q1-chip-dragging', dropPrefix: 'q1-drop-', dropCount: 3,
+    isDone: function () { return q1State.done; },
+    place: q1PlaceWord, findEmpty: q1FindFirstEmpty
+  });
   screen.dataset.qState = 'main';
   screen.dataset.qHelp  = 'closed';
   delete screen.dataset.qDone;
@@ -107,44 +113,7 @@ function q1SetDropDisplay(dropNum, word, correctStyle, wrongStyle) {
   }
 }
 
-/* ── Drag & Drop ─────────────────────────────────────────────── */
-function q1DragStart(event, word) {
-  if (q1State.done) { event.preventDefault(); return; }
-  q1DragWord = word;
-  event.dataTransfer.setData('text/plain', word);
-  event.currentTarget.classList.add('q1-chip-dragging');
-  // Fix 1: pin drag ghost to the element itself at cursor position
-  // — prevents browser from upscaling the ghost image
-  event.dataTransfer.setDragImage(event.currentTarget, event.offsetX, event.offsetY);
-}
-
-function q1DragEnd(event) {
-  event.currentTarget.classList.remove('q1-chip-dragging');
-  q1DragWord = null;
-}
-
-function q1DragOver(event) {
-  if (!q1State.done) event.preventDefault();
-}
-
-function q1DropOnZone(event, dropNum) {
-  if (q1State.done) return;
-  event.preventDefault();
-  var word = event.dataTransfer.getData('text/plain') || q1DragWord;
-  q1DragWord = null;
-  if (!word) return;
-  q1PlaceWord(word, dropNum);
-}
-
-/* ── Click-to-place ─────────────────────────────────────────── */
-function q1ChipClick(event, word) {
-  if (q1State.done) return;
-  var chip = event.currentTarget;
-  if (chip.classList.contains('q1-chip-placed')) return;
-  var empty = q1FindFirstEmpty();
-  if (empty !== null) q1PlaceWord(word, empty);
-}
-
+/* ── Drag / tap: js/wordbank-dnd.js (wired in initQ1). A filled blank is emptied by a click. ── */
 function q1DropZoneClick(dropNum) {
   if (q1State.done) return;
   var word = q1State.drops[dropNum];
@@ -181,11 +150,16 @@ function q1RemoveFromDrop(dropNum) {
   if (!word) return;
   q1State.drops[dropNum] = null;
   q1SetDropDisplay(dropNum, null, false);
-  // Return chip to word bank
+  // Return chip to word bank — at once. A placed chip is display:none, so showing it again
+  // restarts the screen's entry animation (qFadeUp, 9s delay, fill both): the chip stayed
+  // invisible for seconds (MOE Monday 13504392333). Cancel it, as resetQ1ForRetry does.
   var chip = document.querySelector('#screen-q1 .q1-chip[data-word="' + word + '"]');
   if (chip) {
     delete chip.dataset.placed;
     chip.classList.remove('q1-chip-placed');
+    chip.style.animation = 'none';
+    chip.style.opacity   = '1';
+    chip.style.transform = 'translateY(0)';
   }
   q1UpdateSubmitVisibility();  // Fix 3
 }
