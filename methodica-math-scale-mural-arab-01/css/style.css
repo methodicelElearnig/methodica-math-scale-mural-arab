@@ -1386,9 +1386,11 @@ body {
   display: none;
 }
 
-/* Chip while dragging */
+/* Chip while dragging: the bank slot stays as a faint placeholder — the chip "left" it; the moving
+   copy is .pointer-drag-ghost (end of this file). The screen entry animation is switched off inline
+   when the drag starts (js/wordbank-dnd.js), so this opacity is not overridden by its fill. */
 .q1-chip.q1-chip-dragging {
-  opacity: 0.6;
+  opacity: 0.3;
 }
 
 /* ─── Submit button ──────────────────────────────────────── */
@@ -4753,7 +4755,7 @@ body {
   text-align: center;
   pointer-events: none;
 }
-.q7-chip.q7-chip-dragging { opacity: 0.5; }
+.q7-chip.q7-chip-dragging { opacity: 0.3; }
 .q7-chip.q7-chip-placed   { display: none; }
 
 /* כפתור שליחה — left:217 top:718 w:209 h:137 */
@@ -5030,7 +5032,7 @@ body {
   pointer-events: none; z-index: 1;
 }
 .q7b-chip.q7b-chip-placed  { display: none; }
-.q7b-chip.q7b-chip-dragging { opacity: 0.5; }
+.q7b-chip.q7b-chip-dragging { opacity: 0.3; }
 
 /* כפתור שליחה — left:217 top:718 w:209 h:137 */
 .q7b-submit-btn {
@@ -5394,3 +5396,21 @@ body {
   line-height: 1;
 }
 /* /SLIDE18 VIDEO + SCORE POPUP ======================================== */
+
+/* ─── Pointer drag look (q1 / q7 / q7b, 18.11.26) ─────────────────────────────────
+   unit-js/30-pointer-dnd.js clones the chip into .pointer-drag-ghost on <body> (outside #app,
+   so these rules are class-scoped) and marks the blank under the pointer .drag-over.
+   Same three states as body-matter-01 / ratio-05: placeholder, lifted copy, target highlight. */
+.q1-chip.pointer-drag-ghost,
+.q7-chip.pointer-drag-ghost,
+.q7b-chip.pointer-drag-ghost {
+  opacity: 1;
+  cursor: grabbing;
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.35));
+}
+.q1-drop.drag-over,
+.q7-drop.drag-over,
+.q7b-drop.drag-over {
+  border-radius: 9px;
+  box-shadow: 0 0 0 3px #ffc400, 0 0 14px rgba(255, 196, 0, 0.6);
+}

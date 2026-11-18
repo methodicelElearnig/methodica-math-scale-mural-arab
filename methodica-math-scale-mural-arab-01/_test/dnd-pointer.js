@@ -77,6 +77,20 @@ server.listen(0, '127.0.0.1', async () => {
         const vis = await page.evaluate((s) => { const e = document.querySelector(s); const cs = getComputedStyle(e); const r = e.getBoundingClientRect(); return { disp: cs.display, op: cs.opacity, w: r.width }; }, chipSel(c.words[0]));
         ok(`${tag} returned chip visible within 300 ms`, vis.disp !== 'none' && Number(vis.op) > 0.95 && vis.w > 0, JSON.stringify(vis));
 
+        /* 3b. drag word[0] and release on empty card space: not placed, chip fully visible at once,
+               and while dragging the bank chip is a faint placeholder (opacity < 0.5) */
+        await reset(); await sleep(200);
+        a = await rect(chipSel(c.words[0]));
+        await page.mouse.move(a.x, a.y); await page.mouse.down();
+        for (let k = 1; k <= 8; k++) { await page.mouse.move(a.x, a.y - 22 * k); await sleep(15); }
+        const midOp = await page.evaluate((s) => Number(getComputedStyle(document.querySelector(s)).opacity), chipSel(c.words[0]));
+        ok(`${tag} bank chip is a placeholder while dragging`, midOp < 0.5, String(midOp));
+        await page.mouse.up(); await sleep(300);
+        const cv = await page.evaluate((s) => { const e = document.querySelector(s); const cs = getComputedStyle(e); return { disp: cs.display, op: cs.opacity }; }, chipSel(c.words[0]));
+        d = JSON.parse(await state());
+        ok(`${tag} cancelled drag places nothing`, Object.values(d).every((v) => v === null), JSON.stringify(d));
+        ok(`${tag} cancelled drag: chip visible at once`, cv.disp !== 'none' && Number(cv.op) > 0.95, JSON.stringify(cv));
+
         /* 4. touch drag word[0] -> blank 1 */
         await reset(); await sleep(200);
         a = await rect(chipSel(c.words[0])); b = await rect(dropSel(1));

@@ -58,7 +58,7 @@ All mutations were caught. The restored tree passes all 239 checks.
 
 `dnd-pointer.js` (18.11.26, MOE Monday 13504392333): q1 / q7 / q7b at 1366x640 and 1920x1080 — a mouse drag fills
 only the blank it is released on, a tap fills the first empty blank, a clicked blank returns its chip visible within
-300 ms, and a touch drag places. 50 checks; 8 fail on the old native-drag code. Needs puppeteer-core outside OneDrive:
+300 ms, a drag released outside a blank leaves the chip visible (and a faint placeholder while it is dragged), and a touch drag places. 68 checks; the old native-drag code fails 8 of the first 50. Needs puppeteer-core outside OneDrive:
 
 ```bash
 NODE_PATH=C:/Users/Vadim/AppData/Local/Temp/lomda-test/node_modules node _test/dnd-pointer.js
